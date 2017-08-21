@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			.main {
+				position: relative;
+				
+				margin: 20px auto 0;
+				padding: 20px;
+				width: 400px;
+				height: 400px;
+				
+				text-align: center;
+				
+				background: floralwhite;
+				border: 5px solid #cdcdcd;
+			}
+			#content {
+				position: absolute;
+				bottom: 20px;
+				left: 18px;
+				z-index: 1;
+				
+				width: 400px;
+				height: 350px;
+				
+				background: #FFF;
+				border: 2px solid #CDCDCD;
+			}
+			#p1,#span1 {
+				position: absolute;
+				
+				margin: 0;
+				padding: 0;
+				width: 400px;
+				height: 30px;
+				
+				line-height: 30px;
+				
+				color: #fff;
+				background-color: #000;
+				opacity: 0.7;
+				filter: alpha(opacity=70);
+			}
+			
+			#p1 {
+				top: 0;
+				z-index: 5;
+			}
+			#span1 {
+				bottom: 0;
+				left: 0;
+			}
+			
+			#next,#prev {
+				position: absolute;
+				top: 50%;
+				
+				margin-top: -18px;
+				width: 30px;
+				height: 30px;
+			
+				font-size: 2rem;
+				line-height: 30px;
+				font-weight: bold;
+				text-align: center;
+				text-decoration: none;
+				
+				color: #fff;
+				background: lightblue;
+				border: 3px solid #000;
+			}
+			#next {
+				right: 0;
+			}
+			#prev {
+				left: 0;
+			}
+			#img1 {
+				width: 100%;
+				height: 100%;
+			}
+			#btn1,#btn2 {
+				
+				margin: -5px 5px 0;
+				width: 150px;
+				height: 35px;
+				
+				color: #fff;
+				border: none;
+				background: #000000;
+				border-radius: 10px;
+				box-shadow: 2px 2px 3px #000;
+			}
+		</style>
+		<script>
+			window.onload = function () {
+				
+				var oBtn1 = document.getElementById('btn1');
+				var oBtn2 = document.getElementById('btn2');
+			
+				var oImg = document.getElementById('img1');
+				var oP = document.getElementById('p1');
+				var oSpan = document.getElementById('span1');
+			
+				var oNext = document.getElementById('next');
+				var oPrev = document.getElementById('prev');
+			
+				var arrUrl = ['img/1.jpg','img/2.gif','img/3.gif','img/4.gif','img/5.jpg'];
+				var arrText = ['狗0','狗1','狗2','狗3','狗4']
+			
+				var num = 0;
+			
+				function Tab() {
+					//初始化
+					oImg.src = arrUrl[num];
+					oSpan.innerHTML = arrText[num];
+					oP.innerHTML = num + 1 + '/' + arrUrl.length;
+				}
+				
+				Tab();
+				
+				function Prev () {
+					num -- ;
+					if (num < 0) {
+						num = arrUrl.length-1;
+					}
+					
+					Tab();
+				}
+				
+				function Next () {
+					num++;
+					if (num == arrUrl.length) {
+						num = 0;
+					}
+					
+					Tab();
+				}
+				
+				oPrev.onclick = function () {
+					Prev();
+				};
+				oNext.onclick = function() {
+					Next();
+				};
+				
+				oBtn1.onclick = function() {
+					
+					oPrev.onclick = function () {
+						Prev();
+					};
+					
+					oNext.onclick = function() {
+						Next();
+					};
+				}
+				
+				oBtn2.onclick = function() {
+					oPrev.onclick = function () {
+						num -- ;
+						
+						if (num < 0) {
+							num = 0;
+						}
+						
+						Tab ();
+					};
+					
+					oNext.onclick = function() {
+						num ++;
+						
+						if (num == arrUrl.length) {
+							num = arrUrl.length-1;
+						}
+						
+						Tab ();
+					};
+				}
+				
+			}	
+		</script>
+	</head>
+	<body>
+		<div class="main">
+			<button id="btn1" type="button">循环播放</button>
+			<button id="btn2" type="button">顺序播放</button>
+			
+			<div id="content">
+				<img id="img1" src="img/B599F0DDC1FC2B75566BA091D8E2E9A1.gif">
+
+				<p id="p1">lalal</p>
+				<span id="span1">ddaa</span>
+			
+				<a id="next" href="#">></a>
+				<a id="prev" href="#"><</a>
+			</div>
+			
+		</div>
+	</body>
+</html>
